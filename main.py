@@ -8,7 +8,7 @@ Clib = ctypes.CDLL("./libmylib.so")
 Clib.calculate_emissions.argtypes = [ctypes.c_char_p, ctypes.c_float, ctypes.c_float]
 Clib.calculate_emissions.restype = ctypes.c_float
 
-@app.route("/compute", methods = ['GET'])
+@app.route("/compute", methods = ['POST'])
 def compute():
     car_type = request.args.get('engine_type')
     horsepower = float(request.args.get('fuel_efficiency'))
