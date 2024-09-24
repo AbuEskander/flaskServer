@@ -4,8 +4,7 @@
 float calculate_emissions(const char* engine_type, float fuel_efficiency, float distance) {
     float fuel_consumed = 0.0;
     float emissions = 0.0;
-
-    fuel_consumed = fuel_efficiency * distance; 
+    fuel_consumed = (fuel_efficiency * distance) / 100; 
 
     if (strcmp(engine_type, "petrol") == 0) {
         emissions = 2.31 * fuel_consumed;
@@ -21,6 +20,6 @@ float calculate_emissions(const char* engine_type, float fuel_efficiency, float 
         printf("Invalid engine type.\n");
         return -1;
     }
-	//return (fuel_used / distance) * 100;
+	// return ;
     return emissions;
 }

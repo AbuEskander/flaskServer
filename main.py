@@ -1,13 +1,14 @@
 import ctypes
 from flask import Flask,jsonify, request
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 Clib = ctypes.CDLL("./libmylib.so")
 
 Clib.calculate_emissions.argtypes = [ctypes.c_char_p, ctypes.c_float, ctypes.c_float]
 Clib.calculate_emissions.restype = ctypes.c_float
 
-@app.route("/compute", methods = ['POST'])
+@app.route("/compute", methods = ['GET'])
 def compute():
     car_type = request.args.get('engine_type')
     horsepower = float(request.args.get('fuel_efficiency'))
@@ -17,8 +18,8 @@ def compute():
     if not car_type or horsepower is None or weight is None:
         return jsonify({"error": "Missing required parameters"}), 400
     
+    
     performance = Clib.calculate_emissions(car_type_bytes, horsepower, weight)
-
     return jsonify({"performance_score": performance})
 
 
