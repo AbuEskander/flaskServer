@@ -19,3 +19,4 @@ fclean: clean
 
 re: fclean all
 
+.PHONY: re clean all fclean
